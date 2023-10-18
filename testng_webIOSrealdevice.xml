@@ -5,18 +5,18 @@
 		<listener class-name="utilities.Listener" />
 	</listeners>
 	<test name="Test">
-		<parameter name="platformName" value="Android" />
-		<parameter name="platformVersion" value="8.0" />
+		<parameter name="platformName" value="iOS" />
+		<parameter name="platformVersion" value="17.0" />
 		<parameter name="appPackage" value="com.android.calculator2" />
 		<parameter name="appActivity" value="com.android.calculator2.Calculator" />
 		<parameter name="appPath" value="com.android.calculator2" />
-		<parameter name="isWebTest" value="false" />
-		<parameter name="browserName" value="Chrome" />
-		<parameter name="automationName" value="UIAutomator2" />
+		<parameter name="isWebTest" value="true" />
+		<parameter name="browserName" value="Safari" />
+		<parameter name="automationName" value="XCUITest" />
 		<parameter name="link" value="https://demowebshop.tricentis.com/" />
-		<parameter name="deviceName" value="emulator-5554" />
+		<parameter name="deviceName" value="iPhone SE" />
 		<classes>
-			<class name="tests.sampleTest" />
+			<class name="tests.sampleWeb" />
 		</classes>
 	</test> <!-- Test -->
 </suite> <!-- Suite -->
