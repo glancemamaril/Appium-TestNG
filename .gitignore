@@ -1,0 +1,6 @@
+
+test-output/
+extentReports/
+target/test-classes/Frameworkbase/BaseClass.class
+target/test-classes/pages/DemoWebshop/MainPage.class
+target/test-classes/utilities/Listener.class
