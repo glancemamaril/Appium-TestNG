@@ -27,8 +27,9 @@ public class Listener extends BaseClass implements ITestListener {
 	ExtentTest childTest;
 	ExtentReports extent = ermObj.createInstanceExtentReports();
 	public static ThreadLocal<ExtentTest> extentTest = new ThreadLocal<ExtentTest>();
+	String fileSeparator = File.separator; //Windows uses backslash "\", macOS/Linux use regular slash "/"
 	public String fileWithPath;
-	public String filePath = System.getProperty("user.dir")+"\\extentReports\\screenshots\\";
+	public String filePath = System.getProperty("user.dir")+fileSeparator+"extentReports"+fileSeparator+"screenshots"+fileSeparator;
 	public static String methodName;
 	public static String className;
 	public static String SrcBase64String;
@@ -64,9 +65,9 @@ public class Listener extends BaseClass implements ITestListener {
 		SrcBase64String = SrcBase64;
 
 		// copies screenshot to destLoc
-		filePath = filePath + testMethodName + "_" + dt + ".png";
+		fileWithPath = filePath + testMethodName + "_" + dt + ".png";
 		File SrcFile = OutputType.FILE.convertFromBase64Png(SrcBase64);
-		File DestFile = new File(filePath);
+		File DestFile = new File(fileWithPath);
 		try {
 			FileUtils.copyFile(SrcFile, DestFile);
 		} catch (IOException e) {
@@ -80,7 +81,6 @@ public class Listener extends BaseClass implements ITestListener {
 
 	@Override
 	public void onTestSkipped(ITestResult result) {
-		// TODO Auto-generated method stub
 		System.out.println("SKIPPED: "+result.getName());
 	}
 
@@ -92,7 +92,6 @@ public class Listener extends BaseClass implements ITestListener {
 
 	@Override
 	public void onStart(ITestContext context) {
-		// TODO Auto-generated method stub
 		System.out.println("ENGINE START: "+context.getName());
 	}
 

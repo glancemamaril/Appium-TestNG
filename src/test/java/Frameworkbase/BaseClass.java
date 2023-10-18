@@ -21,6 +21,7 @@ public class BaseClass {
 	public String appiumServer = "127.0.0.1";
 	public int appiumPort = 4723;
 	URL appiumURL = null;
+	public String deviceType = "Real";
 	
 	public AppiumDriver getDriver() {
 		return mobileDrivers.get();
@@ -30,22 +31,27 @@ public class BaseClass {
 		mobileDrivers.set(driver);
 	}
 	
-	@Parameters({ "appPackage", "platformName" , "platformVersion", "deviceName", "browserName", "isWebTest","link"})
+	@Parameters({ "appPackage", "platformName" , "platformVersion", "deviceName", "browserName", "isWebTest","link","appPackage","appActivity"})
 	@BeforeTest
-	public void setup(String app,String platformName, String platformVersion, String deviceName, String browserName, String isWebTest, String link) {
+	public void setup(String app,String platformName, String platformVersion, String deviceName, String browserName, String isWebTest, String link, 
+			String appPackage, String appActivity) {
 		try {
 			DesiredCapabilities caps = new DesiredCapabilities();
 			//entering common capabilities
 			caps.setCapability("platformName", platformName);
 			caps.setCapability("platformVersion", platformVersion);
-			caps.setCapability("deviceName", deviceName);		
+			if(deviceType.equalsIgnoreCase("Real")) {
+				caps.setCapability("udid", deviceName);
+			}else {
+				caps.setCapability("deviceName", deviceName);
+			}
 			switch(platformName.toUpperCase()) {
 				/* isWebTest determines if test is web mobile automation
 				 * value will be "true" is the string obtained from .xml file is "true"
 				 * value will be "false" otherwise*/
 				case "ANDROID":
 					caps.setCapability("automationName", "UIAutomator2");
-					setAppCapabilitiesAndroid(caps, Boolean.parseBoolean(isWebTest), browserName);
+					setAppCapabilitiesAndroid(caps, Boolean.parseBoolean(isWebTest), browserName, appPackage, appActivity);
 					break;
 				case "IOS":
 					caps.setCapability("automationName", "XCUITest");
@@ -73,8 +79,6 @@ public class BaseClass {
 	
 	@AfterTest
 	public void teardown() {
-		//mobileDriver.close();
-		//mobileDriver.quit();
 		getDriver().quit();
 		removeDriver();
 	}
@@ -83,13 +87,13 @@ public class BaseClass {
 		mobileDrivers.remove();
 	}
 
-	public DesiredCapabilities setAppCapabilitiesAndroid(DesiredCapabilities cap, boolean isWebTest, String browserName) {
+	public DesiredCapabilities setAppCapabilitiesAndroid(DesiredCapabilities cap, boolean isWebTest, String browserName, String appPackage, String appActivity) {
 		
 		if(isWebTest) {
 			cap.setCapability("browserName", browserName);
 		}else {
-			cap.setCapability("appPackage", "com.android.calculator2");
-			cap.setCapability("appActivity", "com.android.calculator2.Calculator");
+			cap.setCapability("appPackage", appPackage);
+			cap.setCapability("appActivity", appActivity);
 		}
 		return cap;
 	}

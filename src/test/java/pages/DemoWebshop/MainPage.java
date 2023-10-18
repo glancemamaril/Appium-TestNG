@@ -27,7 +27,7 @@ public class MainPage extends UserHelper{
 	private static WebElement lnkWishlist;
 	@FindBy(className = "ico-logout")
 	private static WebElement lnkLogout;
-	@FindBy(className = "account")
+	@FindBy(xpath = "//a[contains(text(), '@')]")
 	private static WebElement lnkAccount;
 	
 	public MainPage() {

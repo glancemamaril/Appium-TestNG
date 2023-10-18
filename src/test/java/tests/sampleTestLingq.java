@@ -6,23 +6,26 @@ import org.testng.annotations.Test;
 import Frameworkbase.BaseClass;
 import io.appium.java_client.AppiumDriver;
 import pages.Calculator;
+import pages.lingq.LoginPage;
+import pages.lingq.StartPage;
 
-public class sampleTest extends BaseClass{
+public class sampleTestLingq extends BaseClass{
 	@SuppressWarnings("rawtypes")
-	Calculator calculator;
+	StartPage startPage;
+	LoginPage loginPage;
 	AppiumDriver driver;
 	
 	private void initialize() {
-		//this.driver = mobileDriver;
-		calculator = new Calculator(driver);
+		driver = getDriver();
+		startPage = new StartPage();
+		loginPage = new LoginPage();
 	}
 	
 	@Test
 	public void testOne() throws InterruptedException {
 		initialize();
 		System.out.println("Completed TestOne");
-		String expression = "1+2=";
-		calculator.parseExpression(expression);
-		Assert.assertTrue(calculator.verifyResult(), "Result not the same!");
+		startPage.clickLogin();
+		loginPage.loginToAccount("glacem28@gmail.com","Genocider28");
 	}
 }
