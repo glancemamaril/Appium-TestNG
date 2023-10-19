@@ -6,10 +6,10 @@
 	</listeners>
 	<test name="Test">
 		<parameter name="platformName" value="Android" />
-		<parameter name="platformVersion" value="14.0" />
-		<parameter name="appPackage" value="com.android.calculator2" />
-		<parameter name="appActivity" value="com.android.calculator2.Calculator" />
-		<parameter name="appPath" value="com.android.calculator2" />
+		<parameter name="platformVersion" value="8.0" />
+		<parameter name="appPackage" value="com.linguist" />
+		<parameter name="appActivity" value="com.lingq.ui.MainActivity" />
+		<parameter name="appPath" value="android.html" />
 		<parameter name="isWebTest" value="true" />
 		<parameter name="browserName" value="Chrome" />
 		<parameter name="automationName" value="UIAutomator2" />

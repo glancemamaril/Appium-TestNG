@@ -1,5 +1,6 @@
 package Frameworkbase;
 
+import java.io.File;
 import java.net.URL;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -21,7 +22,6 @@ public class BaseClass {
 	public String appiumServer = "127.0.0.1";
 	public int appiumPort = 4723;
 	URL appiumURL = null;
-	public String deviceType = "Real";
 	
 	public AppiumDriver getDriver() {
 		return mobileDrivers.get();
@@ -31,31 +31,29 @@ public class BaseClass {
 		mobileDrivers.set(driver);
 	}
 	
-	@Parameters({ "appPackage", "platformName" , "platformVersion", "deviceName", "browserName", "isWebTest","link","appPackage","appActivity"})
+	@Parameters({ "appPath", "platformName" , "deviceName", "browserName", "isWebTest","link","appPackage","appActivity"})
 	@BeforeTest
-	public void setup(String app,String platformName, String platformVersion, String deviceName, String browserName, String isWebTest, String link, 
-			String appPackage, String appActivity) {
+	public void setup(String app,String platformName, String udid, String browserName, String isWebTest, String link, 
+			String appPackageBundleId, String appActivity) {
 		try {
 			DesiredCapabilities caps = new DesiredCapabilities();
+			String fileSeparator = File.separator;
+			String filePath = System.getProperty("user.dir")+fileSeparator+"src"+fileSeparator+"test"
+								+fileSeparator+"resources"+fileSeparator+"apps"+fileSeparator+app;
 			//entering common capabilities
 			caps.setCapability("platformName", platformName);
-			caps.setCapability("platformVersion", platformVersion);
-			if(deviceType.equalsIgnoreCase("Real")) {
-				caps.setCapability("udid", deviceName);
-			}else {
-				caps.setCapability("deviceName", deviceName);
-			}
+			caps.setCapability("udid", udid);
 			switch(platformName.toUpperCase()) {
 				/* isWebTest determines if test is web mobile automation
 				 * value will be "true" is the string obtained from .xml file is "true"
 				 * value will be "false" otherwise*/
 				case "ANDROID":
 					caps.setCapability("automationName", "UIAutomator2");
-					setAppCapabilitiesAndroid(caps, Boolean.parseBoolean(isWebTest), browserName, appPackage, appActivity);
+					setAppCapabilitiesAndroid(caps, Boolean.parseBoolean(isWebTest), browserName, appPackageBundleId, appActivity, filePath);
 					break;
 				case "IOS":
 					caps.setCapability("automationName", "XCUITest");
-					setAppCapabilitiesIOS(caps, Boolean.parseBoolean(isWebTest), browserName);	
+					setAppCapabilitiesIOS(caps, Boolean.parseBoolean(isWebTest), browserName, appPackageBundleId, filePath);	
 					break;
 			}
 			/*Appium URL setup is dependent on the current Appium version
@@ -87,25 +85,33 @@ public class BaseClass {
 		mobileDrivers.remove();
 	}
 
-	public DesiredCapabilities setAppCapabilitiesAndroid(DesiredCapabilities cap, boolean isWebTest, String browserName, String appPackage, String appActivity) {
-		
+	public DesiredCapabilities setAppCapabilitiesAndroid(DesiredCapabilities cap, boolean isWebTest, String browserName,
+			String appPackage, String appActivity, String appFilePath) {
 		if(isWebTest) {
 			cap.setCapability("browserName", browserName);
+		}else if(doesAppFileExist(appFilePath)){	
+			cap.setCapability("app", appFilePath);
 		}else {
 			cap.setCapability("appPackage", appPackage);
-			cap.setCapability("appActivity", appActivity);
+			cap.setCapability("appActivity", appActivity);			
 		}
 		return cap;
 	}
 	
-	public DesiredCapabilities setAppCapabilitiesIOS(DesiredCapabilities cap, boolean isWebTest, String browserName) {
-
+	public DesiredCapabilities setAppCapabilitiesIOS(DesiredCapabilities cap, boolean isWebTest, String browserName,
+			String bundleId, String appFilePath) {
 		if(isWebTest) {
 			cap.setCapability("browserName", browserName);
+		}else if(doesAppFileExist(appFilePath)){
+			cap.setCapability("app", appFilePath);
 		}else {
-			cap.setCapability("appPackage", "com.android.calculator2");
-			cap.setCapability("appActivity", "com.android.calculator2.Calculator");
+			cap.setCapability("bundleId", bundleId);
 		}
 		return cap;
+	}
+	
+	public boolean doesAppFileExist(String appFileName) {
+		File file = new File(appFileName);
+		return file.exists();
 	}
 }

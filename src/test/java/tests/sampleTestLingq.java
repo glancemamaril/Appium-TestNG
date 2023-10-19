@@ -26,6 +26,7 @@ public class sampleTestLingq extends BaseClass{
 		initialize();
 		System.out.println("Completed TestOne");
 		startPage.clickLogin();
+		
 		loginPage.loginToAccount("glacem28@gmail.com","Genocider28");
 	}
 }

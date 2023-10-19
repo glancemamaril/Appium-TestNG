@@ -36,6 +36,6 @@ public class LoginPage extends UserHelper{
 	public void enterPassword(String password) {
 		String method = "enter password";
 		txtPassword.sendKeys(password);
-		takeScreenshotAndLog(driver,method,"entered username/email");
+		takeScreenshotAndLog(driver,method,"entered password");
 	}
 }
