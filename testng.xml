@@ -6,9 +6,9 @@
 	</listeners>
 	<test name="Test">
 		<parameter name="platformName" value="Android" />
-		<parameter name="platformVersion" value="8.0" />
-		<parameter name="appPackage" value="com.android.calculator2" />
-		<parameter name="appActivity" value="com.android.calculator2.Calculator" />
+		<parameter name="platformVersion" value="14.0" />
+		<parameter name="appPackage" value="com.androidsample.generalstore" />
+		<parameter name="appActivity" value="com.androidsample.generalstore.SplashActivity" />
 		<parameter name="appPath" value="com.android.calculator2" />
 		<parameter name="isWebTest" value="false" />
 		<parameter name="browserName" value="Chrome" />
@@ -16,7 +16,7 @@
 		<parameter name="link" value="https://demowebshop.tricentis.com/" />
 		<parameter name="deviceName" value="emulator-5554" />
 		<classes>
-			<class name="tests.sampleTestCalculator" />
+			<class name="tests.sampleTestGeneralStore" />
 		</classes>
 	</test> <!-- Test -->
 </suite> <!-- Suite -->

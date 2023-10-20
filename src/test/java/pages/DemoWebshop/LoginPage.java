@@ -31,9 +31,12 @@ public class LoginPage extends UserHelper{
 	public void login(String email, String password) {
 		String method = "Log in";
 		waitForElement(txtEmail);
+		txtEmail.clear();
 		txtEmail.sendKeys(email);
+		txtPassword.clear();;
 		txtPassword.sendKeys(password);
 		btnLogin.click();
 		takeScreenshotAndLog(driver,method,"entered login credentials");
+		Wait(5);
 	}
 }

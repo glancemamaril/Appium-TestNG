@@ -14,7 +14,7 @@
 		<parameter name="browserName" value="Safari" />
 		<parameter name="automationName" value="XCUITest" />
 		<parameter name="link" value="https://demowebshop.tricentis.com/" />
-		<parameter name="deviceName" value="iPhone 15 Pro Max" />
+		<parameter name="deviceName" value="C1730E8C-D3A9-45FF-8B33-6BAA24211740" />
 		<classes>
 			<class name="tests.sampleWeb" />
 		</classes>

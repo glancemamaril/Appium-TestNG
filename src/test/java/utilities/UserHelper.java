@@ -92,12 +92,12 @@ public class UserHelper {
 		/**
 	     * Wait/Pause command
 	     *
-	     * @param ms as integer. Pause time is in milliseconds.
+	     * @param second as integer. Pause time is seconds.
 	     * @return void
 	     */
-		public void Wait(int ms) {
+		public void Wait(int second) {
 			try {
-				Thread.sleep(ms);
+				Thread.sleep(second*1000);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

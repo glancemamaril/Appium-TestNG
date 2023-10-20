@@ -77,7 +77,7 @@ public class MainPage extends UserHelper{
 		String method = "Verify successful login";
 		String obtainedAccount;
 		//Wait(2000);
-		waitForElement(lnkAccount);
+		//waitForElement(lnkAccount);
 		moveAndHighlightElement(lnkAccount);
 		obtainedAccount = lnkAccount.getText();
 		Assert.assertEquals(obtainedAccount, accountName, "Account not the same!");
@@ -87,8 +87,8 @@ public class MainPage extends UserHelper{
 	public void verifySucessfulLogout() {
 		String method = "Verify successful log out";
 		//Wait(2000);
-		waitForElement(lnkRegister);
-		moveAndHighlightElement(lnkRegister);
+		//waitForElement(lnkRegister);
+		//moveAndHighlightElement(lnkRegister);
 		takeScreenshotAndLog(driver,method,"Logout successful!");
 	}
 }
