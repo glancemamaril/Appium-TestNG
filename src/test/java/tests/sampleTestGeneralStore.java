@@ -22,7 +22,7 @@ public class sampleTestGeneralStore extends BaseClass{
 	public void testOne() throws InterruptedException {
 		initialize();
 		System.out.println("Starting TestOne");
-		startPage.enterGeneralStoreDetails("PW","Taiwan","female");
+		startPage.enterGeneralStoreDetails("PW","Kenya","female");
 		
 	}
 }
