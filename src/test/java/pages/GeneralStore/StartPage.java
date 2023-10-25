@@ -67,9 +67,7 @@ public class StartPage extends UserHelper{
 		ddCountry.click();
 		Wait(2);
 		WebElement countryList = driver.findElement(By.className("android.widget.ListView"));
-		WebElement country = countryList.findElement(new AppiumBy.ByAndroidUIAutomator(
-                "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().textContains(\""
-                + countryName + "\"))"));
+		WebElement country = findAndScrollUntilVisible(countryList,countryName);
 		country.click();
 		takeScreenshotAndLog(driver,method,"chose country");
 	}

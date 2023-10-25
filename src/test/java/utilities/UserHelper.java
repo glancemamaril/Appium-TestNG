@@ -18,6 +18,7 @@ import org.testng.Reporter;
 import com.aventstack.extentreports.MediaEntityBuilder;
 
 import Frameworkbase.BaseClass;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 
 public class UserHelper {
@@ -54,6 +55,13 @@ public class UserHelper {
 		
 		Listener.extentTest.get().pass(description, MediaEntityBuilder.createScreenCaptureFromBase64String(SrcBase64).build());
 		Reporter.log(methodName+": "+description);
+	}
+	
+	public WebElement findAndScrollUntilVisible(WebElement parentElement, String choiceText) {
+		WebElement choice = parentElement.findElement(new AppiumBy.ByAndroidUIAutomator(
+                "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().textContains(\""
+                + choiceText + "\"))"));
+		return choice;
 	}
 	
 	// Move and Highlight---------------------------------------------------

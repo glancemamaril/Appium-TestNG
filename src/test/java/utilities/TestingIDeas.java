@@ -18,9 +18,9 @@ public class TestingIDeas {
 		ExcelReader creds = new ExcelReader(System.getProperty("user.dir") + testDataLoc, "Login");
 		String id = "TC001_TimeTracker_Login_ValidCredentials";
 		String username = creds.testData(id, "username");
-    	String password = creds.testData(id, "password");
+    	//String password = creds.testData(id, "password");
     	//String reason = creds.testData(id, "remarks");
-    	System.out.println(username + " " + password);
+    	System.out.println(username);
 	}
 
 	private static String getAppiumVersion() {

@@ -42,9 +42,7 @@ public class BaseClass {
 			String fileSeparator = File.separator;
 			String filePath = System.getProperty("user.dir")+fileSeparator+"src"+fileSeparator+"test"
 								+fileSeparator+"resources"+fileSeparator+"apps"+fileSeparator+app;
-			//entering common capabilities
-			caps.setCapability("platformName", platformName);
-			caps.setCapability("udid", udid);
+			setAppCapabilitiesCommon(caps,platformName,udid);
 			switch(platformName.toUpperCase()) {
 				/* isWebTest determines if test is web mobile automation
 				 * value will be "true" is the string obtained from .xml file is "true"
@@ -63,8 +61,8 @@ public class BaseClass {
 			 * for versions 2.0 onwards, that string is no longer necessary
 			 * Note that Appium can still automate mobile apps regardless of Appium version
 			 * currently still placed here, in case user is currently using an older version of Appium*/
-			//appiumURL = new URL("http://"+appiumServer+":"+appiumPort+"/wd/hub"); //for Appium 1.2 and lower
-			appiumURL = new URL("http://"+appiumServer+":"+appiumPort);
+			appiumURL = new URL("http://"+appiumServer+":"+appiumPort+"/wd/hub"); //for Appium 1.2 and lower
+			//appiumURL = new URL("http://"+appiumServer+":"+appiumPort);
 			AppiumDriver driver = new AppiumDriver(appiumURL,caps);
 			setDriver(driver);
 			if(Boolean.parseBoolean(isWebTest)) {
@@ -87,7 +85,7 @@ public class BaseClass {
 		mobileDrivers.remove();
 	}
 
-	public DesiredCapabilities setAppCapabilitiesAndroid(DesiredCapabilities cap, boolean isWebTest, String browserName,
+	private DesiredCapabilities setAppCapabilitiesAndroid(DesiredCapabilities cap, boolean isWebTest, String browserName,
 			String appPackage, String appActivity, String appFilePath) {
 		if(isWebTest) {
 			cap.setCapability("browserName", browserName);
@@ -100,7 +98,7 @@ public class BaseClass {
 		return cap;
 	}
 	
-	public DesiredCapabilities setAppCapabilitiesIOS(DesiredCapabilities cap, boolean isWebTest, String browserName,
+	private DesiredCapabilities setAppCapabilitiesIOS(DesiredCapabilities cap, boolean isWebTest, String browserName,
 			String bundleId, String appFilePath) {
 		if(isWebTest) {
 			cap.setCapability("browserName", browserName);
@@ -112,7 +110,14 @@ public class BaseClass {
 		return cap;
 	}
 	
-	public boolean doesAppFileExist(String appFileName) {
+	private DesiredCapabilities setAppCapabilitiesCommon(DesiredCapabilities cap, String platform, String udid) {
+		cap.setCapability("platformName", platform);
+		cap.setCapability("udid", udid);
+		cap.setCapability("noReset", "true");
+		return cap;
+	}
+	
+	private boolean doesAppFileExist(String appFileName) {
 		File file = new File(appFileName);
 		return file.exists();
 	}
