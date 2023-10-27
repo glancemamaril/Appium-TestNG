@@ -114,6 +114,8 @@ public class BaseClass {
 		cap.setCapability("platformName", platform);
 		cap.setCapability("udid", udid);
 		cap.setCapability("noReset", "true");
+		cap.setCapability("unicodeKeyboard", true);
+		cap.setCapability("resetKeyboard", true);
 		return cap;
 	}
 	

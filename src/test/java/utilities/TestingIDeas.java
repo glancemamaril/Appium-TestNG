@@ -21,6 +21,8 @@ public class TestingIDeas {
     	//String password = creds.testData(id, "password");
     	//String reason = creds.testData(id, "remarks");
     	System.out.println(username);
+    	
+    	//JSONParser parser = new JSONParser();
 	}
 
 	private static String getAppiumVersion() {

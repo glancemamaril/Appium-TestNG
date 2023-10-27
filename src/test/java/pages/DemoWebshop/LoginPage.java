@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.nativekey.AndroidKey;
 import utilities.UserHelper;
 
 public class LoginPage extends UserHelper{
@@ -35,8 +36,9 @@ public class LoginPage extends UserHelper{
 		txtEmail.sendKeys(email);
 		txtPassword.clear();;
 		txtPassword.sendKeys(password);
+		//driver.sendKeyEvent(AndroidKey.BACK);
 		btnLogin.click();
 		takeScreenshotAndLog(driver,method,"entered login credentials");
-		Wait(5);
+		//Wait(5);
 	}
 }

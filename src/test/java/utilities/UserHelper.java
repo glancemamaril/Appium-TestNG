@@ -56,7 +56,13 @@ public class UserHelper {
 		Listener.extentTest.get().pass(description, MediaEntityBuilder.createScreenCaptureFromBase64String(SrcBase64).build());
 		Reporter.log(methodName+": "+description);
 	}
-	
+	/**
+     * Highlights the target element in the page.
+     *
+     * @param parentElement as WebElement. Locator of the element to be scrolled over
+     * @param choiceText as String. Name of the string to be located
+     * @return void
+     */
 	public WebElement findAndScrollUntilVisible(WebElement parentElement, String choiceText) {
 		WebElement choice = parentElement.findElement(new AppiumBy.ByAndroidUIAutomator(
                 "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().textContains(\""
