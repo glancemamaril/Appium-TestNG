@@ -24,6 +24,9 @@ public class BaseClass {
 	public String appiumServer = "127.0.0.1";
 	public int appiumPort = 4723;
 	URL appiumURL = null;
+	public static String fileSeparator = File.separator;
+	public String testDataPath;
+	public String apkFilePath;
 	
 	public AppiumDriver getDriver() {
 		return mobileDrivers.get();
@@ -33,14 +36,14 @@ public class BaseClass {
 		mobileDrivers.set(driver);
 	}
 	
-	@Parameters({ "appPath", "platformName" , "deviceName", "browserName", "isWebTest","link","appPackage","appActivity"})
+	@Parameters({ "appPath", "platformName" , "deviceName", "browserName", "isWebTest","link","appPackage","appActivity","testData"})
 	@BeforeClass
 	public void setup(String app,String platformName, String udid, String browserName, String isWebTest, String link, 
-			String appPackageBundleId, String appActivity) {
+			String appPackageBundleId, String appActivity, String testData) {
 		try {
 			DesiredCapabilities caps = new DesiredCapabilities();
-			String fileSeparator = File.separator;
-			String filePath = System.getProperty("user.dir")+fileSeparator+"src"+fileSeparator+"test"
+			testDataPath = System.getProperty("user.dir")+fileSeparator+"TestData"+fileSeparator+testData;
+			apkFilePath = System.getProperty("user.dir")+fileSeparator+"src"+fileSeparator+"test"
 								+fileSeparator+"resources"+fileSeparator+"apps"+fileSeparator+app;
 			setAppCapabilitiesCommon(caps,platformName,udid);
 			switch(platformName.toUpperCase()) {
@@ -49,11 +52,11 @@ public class BaseClass {
 				 * value will be "false" otherwise*/
 				case "ANDROID":
 					caps.setCapability("automationName", "UIAutomator2");
-					setAppCapabilitiesAndroid(caps, Boolean.parseBoolean(isWebTest), browserName, appPackageBundleId, appActivity, filePath);
+					setAppCapabilitiesAndroid(caps, Boolean.parseBoolean(isWebTest), browserName, appPackageBundleId, appActivity, apkFilePath);
 					break;
 				case "IOS":
 					caps.setCapability("automationName", "XCUITest");
-					setAppCapabilitiesIOS(caps, Boolean.parseBoolean(isWebTest), browserName, appPackageBundleId, filePath);	
+					setAppCapabilitiesIOS(caps, Boolean.parseBoolean(isWebTest), browserName, appPackageBundleId, apkFilePath);	
 					break;
 			}
 			/*Appium URL setup is dependent on the current Appium version
@@ -61,8 +64,8 @@ public class BaseClass {
 			 * for versions 2.0 onwards, that string is no longer necessary
 			 * Note that Appium can still automate mobile apps regardless of Appium version
 			 * currently still placed here, in case user is currently using an older version of Appium*/
-			appiumURL = new URL("http://"+appiumServer+":"+appiumPort+"/wd/hub"); //for Appium 1.2 and lower
-			//appiumURL = new URL("http://"+appiumServer+":"+appiumPort);
+			//appiumURL = new URL("http://"+appiumServer+":"+appiumPort+"/wd/hub"); //for Appium 1.2 and lower
+			appiumURL = new URL("http://"+appiumServer+":"+appiumPort);
 			AppiumDriver driver = new AppiumDriver(appiumURL,caps);
 			setDriver(driver);
 			if(Boolean.parseBoolean(isWebTest)) {
@@ -77,6 +80,7 @@ public class BaseClass {
 	
 	@AfterClass
 	public void teardown() {
+		getDriver().close();
 		getDriver().quit();
 		removeDriver();
 	}

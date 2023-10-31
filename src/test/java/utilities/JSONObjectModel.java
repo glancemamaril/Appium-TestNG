@@ -1,14 +1,15 @@
 package utilities;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class JSONObjectModel {
-	private String name;
-	private String password;
+	@JsonProperty("users")
+	private TestCaseData[] users;
 	
-	public String getName() {
-		return name;
-	}
-	
-	public String getPassword() {
-		return password;
+	public TestCaseData[] getTestCaseData() {
+		return users;
 	}
 }

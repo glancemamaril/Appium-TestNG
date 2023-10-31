@@ -23,7 +23,6 @@ public class ExcelReader {
 	private static Map<String, HashMap<String,String>> testDataMap = new LinkedHashMap<String, HashMap<String, String>>();
 	
 	public ExcelReader(String filePath, String sheetName) {
-		System.out.println(filePath);
 		getDataSheetMap(filePath,sheetName);
 	}
 	
