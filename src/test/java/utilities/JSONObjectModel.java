@@ -1,15 +1,14 @@
 package utilities;
 
-import java.util.List;
+import java.util.Map;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class JSONObjectModel {
-	@JsonProperty("users")
-	private TestCaseData[] users;
+	@JsonProperty("Testcases")
+	private Map<String, TestCaseData> testcases;
 	
-	public TestCaseData[] getTestCaseData() {
-		return users;
+	public Map<String, TestCaseData> getTestCaseData() {
+		return testcases;
 	}
 }

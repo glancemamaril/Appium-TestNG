@@ -1,12 +1,18 @@
 {
-	"users":[
-		{
+	"Testcases":{
+		"TC001":{
 			"username": "json derulo",
-			"password": "JSONDerulo"
+			"password": "JSONDerulo",
+			"sex": "Male"
 		},
-		{
+		"TC002":{
 			"username": "Voldemort",
-			"password": "Selenium123"
+			"password": "CSharp3Days"
+		},
+		"TC003":{
+			"username": "APCargo",
+			"password": "Release1OutOf10",
+			"sex": null
 		}
-	]
+	}
 }

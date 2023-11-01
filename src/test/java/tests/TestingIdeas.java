@@ -28,35 +28,35 @@ public class TestingIdeas {
 		URL appiumURL = null;
 		DesiredCapabilities caps = new DesiredCapabilities();
 		
-		//caps.setCapability("platformName", "iOS");
+//		caps.setCapability("platformName", "iOS");
 		caps.setCapability("platformName", "Android");
 		
-		//caps.setCapability("platformVersion", "14.0");
-		//caps.setCapability("deviceName", "Samsung A11");
+//		caps.setCapability("platformVersion", "14.0");
+//		caps.setCapability("deviceName", "Samsung A11");
 		
-		//caps.setCapability("udid", "R9RR7014CKH");
+//		caps.setCapability("udid", "R9RR7014CKH");
 		caps.setCapability("udid", "emulator-5554");
-		//caps.setCapability("udid", "C1730E8C-D3A9-45FF-8B33-6BAA24211740");
+//		caps.setCapability("udid", "C1730E8C-D3A9-45FF-8B33-6BAA24211740");
 		
-		//caps.setCapability("browserName", "Chrome");
-		//caps.setCapability("browserName", "Safari");
+//		caps.setCapability("browserName", "Chrome");
+//		caps.setCapability("browserName", "Safari");
 		
 		caps.setCapability("appPackage","com.androidsample.generalstore");
 		caps.setCapability("appActivity","com.androidsample.generalstore.SplashActivity");
 		
 		caps.setCapability("automationName", "UIAutomator2");
-		//caps.setCapability("automationName", "XCUITest");
+//		caps.setCapability("automationName", "XCUITest");
 		
 		appiumURL = new URL("http://"+appiumServer+":"+appiumPort);
 		AppiumDriver driver = new AppiumDriver(appiumURL,caps);
-		//driver.get("https://demowebshop.tricentis.com/");
+//		driver.get("https://demowebshop.tricentis.com/");
 		Thread.sleep(3000);
 		driver.findElement(By.id("com.androidsample.generalstore:id/nameField")).sendKeys("PW");
 		driver.findElement(By.id("com.androidsample.generalstore:id/btnLetsShop")).click();
 		
 		Thread.sleep(5000);
 		
-		//RemoteExecuteMethod executeMethod = new RemoteExecuteMethod((RemoteWebDriver)driver);
+//		RemoteExecuteMethod executeMethod = new RemoteExecuteMethod((RemoteWebDriver)driver);
 		((JavascriptExecutor)driver).executeScript("mobile: swipeGesture", ImmutableMap.of(
 			    "left", 100, "top", 100, "width", 200, "height", 200,
 			    "direction", "up",

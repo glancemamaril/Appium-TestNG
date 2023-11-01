@@ -13,7 +13,7 @@ import org.apache.commons.csv.CSVRecord;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class TestingIDeas {
+public class TestingIdeas {
 	public static void main(String[] args) {
 		String fileSeparator = File.separator;
 		String scrFilePath = System.getProperty("user.dir")+fileSeparator+"extentReports"+fileSeparator+"screenshots"+fileSeparator;
@@ -21,6 +21,8 @@ public class TestingIDeas {
 		System.out.println(scrFilePath);
 		
 		String os = System.getProperty("os.name").toLowerCase();
+		System.out.println(os);
+		
 		String excelTestDataLoc = fileSeparator+"testData"+fileSeparator+"timetracker_glenn_v2.xlsx";
 		String jsonTestDataLoc = tdFilePath+"derulo.json";
 		String csvTestDataLoc = tdFilePath+"SampleTestData.csv";
@@ -33,29 +35,22 @@ public class TestingIDeas {
 		System.out.println(fileExtension);
 		//String appiumVersion = getAppiumVersion();
 		//System.out.println(appiumVersion);
+		
+		//EXCEL
 		ExcelReader creds = new ExcelReader(System.getProperty("user.dir") + excelTestDataLoc, "Login");
 		String id = "TC001_TimeTracker_Login_ValidCredentials";
 		String username = creds.testData(id, "username");
-    	//String password = creds.testData(id, "password");
-    	//String reason = creds.testData(id, "remarks");
     	System.out.println(username);
-    	
-    	//JSONParser parser = new JSONParser();
-    	ObjectMapper objectMapper = new ObjectMapper();
-    	
-    	try {
-    		JSONObjectModel data = objectMapper.readValue(new File(jsonTestDataLoc), JSONObjectModel.class);
-    		
-    		for(TestCaseData testcase : data.getTestCaseData()) {
-    			System.out.println("----------");
-    			System.out.println(testcase.getUsername());
-    			System.out.println(testcase.getPassword());
-    		}
-    		System.out.println("----------");
-    	}catch(IOException e) {
-    		e.printStackTrace();
-    	}
-    	
+    	//JSON
+    	JSONReader jsonFile = new JSONReader(jsonTestDataLoc);
+    	TestCaseData tcData = jsonFile.getTestCaseData("TC001");
+    	String TCUsername = tcData.getUsername();
+    	String TCPassword = tcData.getPassword();
+    	String TCSex = tcData.getSex();
+		System.out.println(TCUsername);
+		System.out.println(TCPassword);
+		System.out.println(TCSex);
+    	//CSV
     	CSVReader csvCreds = new CSVReader(csvTestDataLoc);
     	System.out.println(csvCreds.getData("TC002","password"));
 	}
