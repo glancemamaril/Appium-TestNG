@@ -13,6 +13,11 @@
 			"username": "APCargo",
 			"password": "Release1OutOf10",
 			"sex": null
+		},
+		"TC004":{
+			"username": "jdl1@test.com",
+			"password": "password1",
+			"sex": null
 		}
 	}
 }

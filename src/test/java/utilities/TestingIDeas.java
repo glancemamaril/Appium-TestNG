@@ -27,20 +27,20 @@ public class TestingIdeas {
 		String jsonTestDataLoc = tdFilePath+"derulo.json";
 		String csvTestDataLoc = tdFilePath+"SampleTestData.csv";
 		
-		String fileExtension = getFileExtension(new File(jsonTestDataLoc));
-		System.out.println(fileExtension);
-		fileExtension = getFileExtension(new File(csvTestDataLoc));
-		System.out.println(fileExtension);
-		fileExtension = getFileExtension(new File(System.getProperty("user.dir") + excelTestDataLoc));
-		System.out.println(fileExtension);
+//		String fileExtension = getFileExtension(new File(jsonTestDataLoc));
+//		System.out.println(fileExtension);
+//		fileExtension = getFileExtension(new File(csvTestDataLoc));
+//		System.out.println(fileExtension);
+//		fileExtension = getFileExtension(new File(System.getProperty("user.dir") + excelTestDataLoc));
+//		System.out.println(fileExtension);
 		//String appiumVersion = getAppiumVersion();
 		//System.out.println(appiumVersion);
 		
 		//EXCEL
-		ExcelReader creds = new ExcelReader(System.getProperty("user.dir") + excelTestDataLoc, "Login");
-		String id = "TC001_TimeTracker_Login_ValidCredentials";
-		String username = creds.testData(id, "username");
-    	System.out.println(username);
+//		ExcelReader creds = new ExcelReader(System.getProperty("user.dir") + excelTestDataLoc, "Login");
+//		String id = "TC001_TimeTracker_Login_ValidCredentials";
+//		String username = creds.testData(id, "username");
+//    	System.out.println(username);
     	//JSON
     	JSONReader jsonFile = new JSONReader(jsonTestDataLoc);
     	TestCaseData tcData = jsonFile.getTestCaseData("TC001");

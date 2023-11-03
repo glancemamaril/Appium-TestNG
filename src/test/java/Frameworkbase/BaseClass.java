@@ -80,7 +80,7 @@ public class BaseClass {
 	
 	@AfterClass
 	public void teardown() {
-		getDriver().close();
+//		getDriver().close();
 		getDriver().quit();
 		removeDriver();
 	}
@@ -117,8 +117,8 @@ public class BaseClass {
 	private DesiredCapabilities setAppCapabilitiesCommon(DesiredCapabilities cap, String platform, String udid) {
 		cap.setCapability("platformName", platform);
 		cap.setCapability("udid", udid);
-		cap.setCapability("noReset", "true");
-		cap.setCapability("unicodeKeyboard", true);
+//		cap.setCapability("noReset", "true");
+		cap.setCapability("hideKeyboard", true);
 		cap.setCapability("resetKeyboard", true);
 		return cap;
 	}

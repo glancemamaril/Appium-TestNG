@@ -15,7 +15,7 @@
 		<parameter name="automationName" value="UIAutomator2" />
 		<parameter name="deviceName" value="emulator-5554" />
 		<parameter name="link" value="https://demowebshop.tricentis.com/" />
-		<parameter name="testData" value="timetracker_glenn_v2.xlsx" />
+		<parameter name="testData" value="derulo.json" />
 		<classes>
 			<class name="tests.sampleWeb" />
 		</classes>
