@@ -20,7 +20,7 @@ public class TestingIdeas {
 		String tdFilePath = System.getProperty("user.dir")+fileSeparator+"testData"+fileSeparator;
 		System.out.println(scrFilePath);
 		
-		String os = System.getProperty("os.name").toLowerCase();
+		String os = System.getProperty("os.name");
 		System.out.println(os);
 		
 		String excelTestDataLoc = fileSeparator+"testData"+fileSeparator+"timetracker_glenn_v2.xlsx";
@@ -43,7 +43,7 @@ public class TestingIdeas {
 //    	System.out.println(username);
     	//JSON
     	JSONReader jsonFile = new JSONReader(jsonTestDataLoc);
-    	TestCaseData tcData = jsonFile.getTestCaseData("TC001");
+    	TestCaseData tcData = jsonFile.getTestCaseData("TC004");
     	String TCUsername = tcData.getUsername();
     	String TCPassword = tcData.getPassword();
     	String TCSex = tcData.getSex();
