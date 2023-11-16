@@ -3,8 +3,13 @@ package utilities;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.logging.log4j.core.tools.Generate.CustomLogger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.ITestContext;
@@ -27,7 +32,7 @@ public class Listener extends BaseClass implements ITestListener {
 	ExtentTest childTest;
 	ExtentReports extent = ermObj.createInstanceExtentReports();
 	public static ThreadLocal<ExtentTest> extentTest = new ThreadLocal<ExtentTest>();
-	String fileSeparator = File.separator; //Windows uses backslash "\", macOS/Linux use regular slash "/"
+	public static String fileSeparator = File.separator; //Windows uses backslash "\", macOS/Linux use regular slash "/"
 	public String fileWithPath;
 	public String filePath = System.getProperty("user.dir")+fileSeparator+"extentReports"+fileSeparator+"screenshots"+fileSeparator;
 	public static String methodName;
@@ -35,6 +40,9 @@ public class Listener extends BaseClass implements ITestListener {
 	public static String SrcBase64String;
 	public static LocalDateTime now = LocalDateTime.now();
 	public static String dt = now.toString().replace(":",".");
+	private static final Logger LOGGER = Logger.getLogger(CustomLogger.class.getName());
+	private static FileHandler fileHandler;
+	
 	
 	@Override
 	public void onTestStart(ITestResult result) {
@@ -46,6 +54,8 @@ public class Listener extends BaseClass implements ITestListener {
 		parentTest.assignCategory("Smoke");
 		childTest = parentTest.createNode(methodName);
 		extentTest.set(childTest);
+		System.out.println(className);
+		configureLogger(className);
 	}
 
 	@Override
@@ -53,6 +63,7 @@ public class Listener extends BaseClass implements ITestListener {
 		String testMethodName = result.getMethod().getMethodName();
 		System.out.println("Testcase Passed :"+result.getName());
 		extentTest.get().pass(MarkupHelper.createLabel("PASSED: "+testMethodName, ExtentColor.GREEN));
+		LOGGER.info("Test passed: " + result.getName());
 	}
 
 	@SuppressWarnings({ "rawtypes", "unused" })
@@ -77,6 +88,8 @@ public class Listener extends BaseClass implements ITestListener {
 		extentTest.get().fail(result.getThrowable(),
 				MediaEntityBuilder.createScreenCaptureFromBase64String(SrcBase64String).build());
 		extentTest.get().fail(MarkupHelper.createLabel("FAILED: " + testMethodName, ExtentColor.RED));
+		LOGGER.severe("Test failed: " + result.getName());
+		LOGGER.severe("Exception: " + result.getThrowable());
 	}
 
 	@Override
@@ -100,6 +113,23 @@ public class Listener extends BaseClass implements ITestListener {
 		// TODO Auto-generated method stub
 		System.out.println("ENGINE FINISH");
 		extent.flush();
+		if(fileHandler!=null) {
+			fileHandler.close();
+		}
 	}
 
+	private static void configureLogger(String className) {
+		try {
+			fileHandler = new FileHandler(System.getProperty("user.dir")+fileSeparator+"testLogs"+fileSeparator+className+".log", true);
+			
+			SimpleFormatter formatter = new SimpleFormatter();
+			fileHandler.setFormatter(formatter);
+			
+			LOGGER.setLevel(Level.ALL);
+			LOGGER.addHandler(fileHandler);
+			
+		}catch(Exception e) {
+			LOGGER.log(Level.SEVERE, "Error configuring logger", e);
+		}
+	}
 }

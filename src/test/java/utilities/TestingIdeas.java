@@ -109,8 +109,8 @@ public class TestingIdeas {
 			fileHandler.setFormatter(formatter);
 			
 			LOGGER.setLevel(Level.ALL);
-			
 			LOGGER.addHandler(fileHandler);
+			
 		}catch(Exception e) {
 			LOGGER.log(Level.SEVERE, "Error configuring logger", e);
 		}
