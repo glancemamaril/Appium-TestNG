@@ -10,17 +10,23 @@ import com.aventstack.extentreports.reporter.configuration.Theme;
 
 public class ExtentReporterManager {
 	static ExtentReports extent;
+	public static String fileSeparator = File.separator;	//Windows uses backslash "\", macOS/Linux use regular slash "/"
 	public static Properties prop;
-	public static String filePath = "\\config.properties";
-	public String reportName = "HTML Report";
-	public String documentTitle = "TestNG Report";
-	public String tester = "Glenn";
-	public String environment = "QA";
-	public String testType = "Regression";
+	public static String filePath = fileSeparator+"config.properties";
+	ReadConfig readConfigObj = new ReadConfig();
+	public String reportName = readConfigObj.getReportName();
+	public String documentTitle = readConfigObj.getDocumentTitle();
+	public String tester = readConfigObj.getTester();
+	public String environment = readConfigObj.getEnvironment();
+	public String testType = readConfigObj.getTestType();
+//	public String reportName = "HTML Report";
+//	public String documentTitle = "TestNG Report";
+//	public String tester = "Glenn";
+//	public String environment = "QA";
+//	public String testType = "Regression";
 	
 	public ExtentReports createInstanceExtentReports() {
 		
-		String fileSeparator = File.separator; //Windows uses backslash "\", macOS/Linux use regular slash "/"
 		LocalDateTime now = LocalDateTime.now();
 		String date = now.toString().replace(":",".");
 		String fileName  = "Automation Report_" + date + ".html";
