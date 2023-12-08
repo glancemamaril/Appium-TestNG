@@ -64,8 +64,8 @@ public class BaseClass {
 			 * for versions 2.0 onwards, that string is no longer necessary
 			 * Note that Appium can still automate mobile apps regardless of Appium version
 			 * currently still placed here, in case user is currently using an older version of Appium*/
-			appiumURL = new URL("http://"+appiumServer+":"+appiumPort+"/wd/hub"); //for Appium 1.2 and lower
-//			appiumURL = new URL("http://"+appiumServer+":"+appiumPort);
+//			appiumURL = new URL("http://"+appiumServer+":"+appiumPort+"/wd/hub"); //for Appium 1.2 and lower
+			appiumURL = new URL("http://"+appiumServer+":"+appiumPort);
 			AppiumDriver driver = new AppiumDriver(appiumURL,caps);
 			setDriver(driver);
 			if(Boolean.parseBoolean(isWebTest)) {

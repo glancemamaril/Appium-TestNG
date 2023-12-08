@@ -14,7 +14,7 @@
 		<parameter name="browserName" value="Chrome" />
 		<parameter name="automationName" value="UIAutomator2" />
 		<parameter name="link" value="https://demowebshop.tricentis.com/" />
-		<parameter name="deviceName" value="R9RR7014CKH" />
+		<parameter name="deviceName" value="emulator-5554" />
 		<parameter name="testData" value="derulo.json" />
 		<classes>
 			<class name="tests.sampleTestGeneralStore" />

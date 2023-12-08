@@ -42,7 +42,7 @@ public class TestingIdeas {
 		fileExtension = getFileExtension(new File(System.getProperty("user.dir") + excelTestDataLoc));
 		System.out.println(fileExtension);
 		//String appiumVersion = getAppiumVersion();
-		//System.out.println(appiumVersion);
+		System.out.println(System.getProperty("user.dir")+fileSeparator+"testLogs"+fileSeparator+"test.log");
 		
 		//EXCEL
 //		ExcelReader creds = new ExcelReader(System.getProperty("user.dir") + excelTestDataLoc, "Login");
@@ -61,10 +61,10 @@ public class TestingIdeas {
 //    	//CSV
 //    	CSVReader csvCreds = new CSVReader(csvTestDataLoc);
 //    	System.out.println(csvCreds.getData("TC002","password"));
-		configureLogger();
-		
-		LOGGER.info("Test Info");
-		LOGGER.warning("Test warning!");
+//		configureLogger();
+//		
+//		LOGGER.info("Test Info");
+//		LOGGER.warning("Test warning!");
 	}
 	
 	private static String getFileExtension(File file) {
