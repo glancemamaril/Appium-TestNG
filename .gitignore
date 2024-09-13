@@ -8,3 +8,4 @@ target/test-classes/
 target/classes/
 testData/.DS_Store
 .DS_Store
+/target/
